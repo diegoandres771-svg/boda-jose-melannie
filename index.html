@@ -1530,11 +1530,20 @@
 
 </body>
 </html>
-
+<!-- Audio oculto -->
 <audio id="musica-fondo" loop>
   <source src="cancion.mp3" type="audio/mpeg">
 </audio>
 
-<button onclick="document.getElementById('musica-fondo').play()" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; padding: 10px; background-color: #f8f8f8; border: 1px solid #ccc; cursor: pointer;">
-  🎵 Activar música
-</button>
+<script>
+  // Función para iniciar la música al primer clic en cualquier lugar
+  function iniciarMusica() {
+    const audio = document.getElementById('musica-fondo');
+    audio.play();
+    // Elimina el evento para que no se ejecute múltiples veces
+    document.removeEventListener('click', iniciarMusica);
+  }
+
+  // Escucha el primer clic del usuario en toda la página
+  document.addEventListener('click', iniciarMusica);
+</script>
