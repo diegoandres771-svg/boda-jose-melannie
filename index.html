@@ -360,6 +360,233 @@
     color:var(--gray);
   }
 
+  /* AMBIENT BACKGROUND LIGHTS */
+  .ambient-lights{
+    position:fixed; inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .ambient-lights span{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:0.32;
+    mix-blend-mode:screen;
+    will-change:transform;
+  }
+  .light-1{
+    width:360px; height:360px;
+    background:var(--gold);
+    top:-100px; left:-80px;
+    animation:driftA 24s ease-in-out infinite alternate;
+  }
+  .light-2{
+    width:440px; height:440px;
+    background:#2A5847;
+    top:38%; right:-140px;
+    animation:driftB 28s ease-in-out infinite alternate;
+  }
+  .light-3{
+    width:320px; height:320px;
+    background:var(--gold);
+    bottom:-110px; left:18%;
+    opacity:0.22;
+    animation:driftC 32s ease-in-out infinite alternate;
+  }
+  .light-4{
+    width:260px; height:260px;
+    background:#3A6B56;
+    top:70%; left:55%;
+    opacity:0.2;
+    animation:driftA 20s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes driftA{ 0%{ transform:translate(0,0); } 100%{ transform:translate(60px,90px); } }
+  @keyframes driftB{ 0%{ transform:translate(0,0); } 100%{ transform:translate(-55px,-70px); } }
+  @keyframes driftC{ 0%{ transform:translate(0,0); } 100%{ transform:translate(45px,-55px); } }
+
+  /* PEARL PANELS — light cream cards used for poetic/detail blocks on the dark page */
+  .pearl-panel{
+    background:var(--cream);
+    color:var(--black);
+    border-radius:3px;
+    width:100%;
+    max-width:420px;
+    padding:2.6rem 1.8rem;
+    box-shadow:0 18px 40px -16px rgba(0,0,0,0.5);
+  }
+  .pearl-panel .label{ color:var(--gold); }
+  .pearl-quote{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.15rem, 4vw, 1.4rem);
+    line-height:1.55;
+    color:var(--black);
+  }
+  .pearl-panel .pearl-rule{
+    width:36px; height:1px;
+    background:var(--gold);
+    margin:1rem auto 1.4rem;
+  }
+  .pearl-eyebrow{
+    font-size:0.66rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:0.9rem;
+  }
+
+  .program-panel{
+    background:var(--cream);
+    border-radius:6px;
+    padding:2.6rem 1.8rem 1.8rem;
+    width:100%;
+    max-width:380px;
+    margin-top:2rem;
+    box-shadow:0 18px 40px -16px rgba(0,0,0,0.5);
+    position:relative;
+    overflow:hidden;
+  }
+  .program-panel::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0;
+    height:3px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .program-panel .timeline-icon{
+    background:var(--cream);
+    border-color:var(--gold);
+  }
+  .program-panel .timeline-time{ color:var(--black); }
+  .program-panel .timeline-label{ color:#8C8275; }
+  .program-panel .timeline-item::before{ background:rgba(16,35,28,0.12); }
+
+  .detail-cards{
+    display:flex;
+    flex-direction:column;
+    gap:1.1rem;
+    width:100%;
+    max-width:380px;
+    margin-top:1rem;
+  }
+  .detail-card{
+    background:var(--cream);
+    color:var(--black);
+    border-radius:3px;
+    padding:1.8rem 1.4rem;
+    box-shadow:0 14px 32px -16px rgba(0,0,0,0.5);
+  }
+  .detail-card .d-icon{
+    color:var(--gold);
+    margin-bottom:0.7rem;
+  }
+  .detail-card h3{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.3rem;
+    margin-bottom:0.5rem;
+  }
+  .detail-card p{
+    font-size:0.85rem;
+    line-height:1.55;
+    color:#5C5650;
+  }
+
+  /* GIFT ENVELOPE — closed envelope card that opens to reveal bank details */
+  .gift-card{
+    cursor:pointer;
+    text-align:center;
+  }
+  .gift-envelope{
+    position:relative;
+    width:92px; height:66px;
+    margin:0 auto 1rem;
+    perspective:600px;
+  }
+  .gift-body{
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, #FFFDF9, var(--cream));
+    border:1px solid var(--gold-soft);
+    border-radius:3px;
+  }
+  .gift-flap{
+    position:absolute; top:0; left:0; right:0;
+    height:58%;
+    background:linear-gradient(165deg, #FFFEFB, #EFE7D8);
+    clip-path: polygon(0 0, 100% 0, 50% 90%);
+    transform-origin:top;
+    transform-style:preserve-3d;
+    transition:transform 0.7s cubic-bezier(.65,-0.15,.35,1.1);
+    border-bottom:1px solid var(--gold-soft);
+    z-index:2;
+  }
+  .gift-card.open .gift-flap{ transform:rotateX(178deg); }
+  .wax-seal-mini{
+    position:absolute; top:55%; left:50%;
+    transform:translate(-50%,-50%);
+    width:30px; height:30px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 32% 28%, #b8313a 0%, #8c1d24 45%, #6e1117 85%);
+    box-shadow:
+      0 3px 6px rgba(0,0,0,0.4),
+      inset 0 1px 2px rgba(255,255,255,0.25),
+      inset 0 -2px 3px rgba(0,0,0,0.45);
+    display:flex; align-items:center; justify-content:center;
+    z-index:3;
+    transition:opacity 0.3s ease, transform 0.3s ease;
+  }
+  .wax-seal-mini::before{
+    content:"";
+    position:absolute; inset:2px;
+    border-radius:50%;
+    border:1px solid rgba(255,236,230,0.25);
+  }
+  .wax-seal-mini-text{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:0.62rem;
+    letter-spacing:0.01em;
+    color:rgba(255,238,232,0.92);
+    text-shadow:0 1px 1px rgba(0,0,0,0.5), 0 -1px 0 rgba(255,255,255,0.08);
+  }
+  .wax-dot{ opacity:0.7; margin:0 0.04em; }
+  .gift-card.open .wax-seal-mini{ opacity:0; transform:translate(-50%,-50%) scale(0.5) rotate(-10deg); }
+  .gift-hint{
+    font-size:0.78rem;
+    color:#8C8275;
+    transition:opacity 0.25s ease;
+  }
+  .gift-card.open .gift-hint{ display:none; }
+  .gift-details{
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    transition:max-height 0.5s ease, opacity 0.4s ease 0.1s;
+    text-align:left;
+  }
+  .gift-card.open .gift-details{ max-height:240px; opacity:1; margin-top:0.9rem; }
+  .gift-details p{
+    font-size:0.82rem;
+    line-height:1.6;
+    color:#5C5650;
+    margin-bottom:0.3rem;
+  }
+  .gift-details strong{ color:var(--black); }
+
+  .closing-quote{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.4rem, 5vw, 2rem);
+    color:var(--cream);
+    line-height:1.5;
+    max-width:360px;
+  }
+  .closing-quote .pearl-rule{
+    width:36px; height:1px;
+    background:var(--gold);
+    margin:1.4rem auto;
+  }
+
   /* SECTION LABEL pattern */
   .label{
     font-size:0.7rem;
@@ -856,7 +1083,14 @@
 </head>
 <body>
 
-<div class="envelope-screen" id="envelopeScreen">
+<div class="ambient-lights">
+  <span class="light-1"></span>
+  <span class="light-2"></span>
+  <span class="light-3"></span>
+  <span class="light-4"></span>
+</div>
+
+<div class="envelope-screen" id="envelopeScreen" onclick="if(window.openEnvelope) window.openEnvelope();">
   <div class="envelope-wrap" id="envelopeWrap">
     <div class="envelope" id="envelopeBtn">
       <div class="envelope-back paper-grain"></div>
@@ -912,6 +1146,25 @@
   <div class="scroll-hint">Desliza ↓</div>
 </section>
 
+<!-- NUESTRA HISTORIA (PREVIOUSLY) -->
+<section>
+  <div class="section-mark"></div>
+  <div class="label reveal-up">Nuestra historia</div>
+  <div class="pearl-panel reveal-up delay-1">
+    <div class="pearl-eyebrow">El previously</div>
+    <p class="pearl-quote">
+      "En el firmamento de nuestras vidas, un 'hola' encendió una estrella en 2017.
+      Nueve años de complicidad y crecimiento después, esa luz nos guía hacia el más
+      brillante de los caminos..."
+    </p>
+    <div class="pearl-rule"></div>
+    <p class="pearl-quote" style="font-size:0.95rem; font-style:normal;">
+      Nueve años de cultivar sueños, de aprender a caminar al mismo ritmo.
+      Aquel clic del primer encuentro se convirtió en el compás de nuestra vida.
+    </p>
+  </div>
+</section>
+
 <!-- ENGAGEMENT MOMENT -->
 <section class="bleed-section">
   <div class="bleed-photo reveal-photo">
@@ -939,6 +1192,8 @@
     Agregar a Google Calendar
   </a>
 
+  <div class="label reveal-up" style="margin-top:2.6rem;">Programa del día</div>
+  <div class="program-panel reveal-up delay-1">
   <div class="timeline">
     <div class="timeline-item reveal-line" data-delay="0">
       <div class="timeline-icon">
@@ -967,6 +1222,7 @@
         <div class="timeline-label">Fiesta</div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -1029,6 +1285,30 @@
 
 <section class="bleed-below">
   <div class="section-mark"></div>
+  <div class="label reveal-up">Detalles</div>
+  <div class="detail-cards">
+    <div class="detail-card gift-card reveal-up delay-1" id="giftCard" onclick="toggleGift()">
+      <div class="gift-envelope">
+        <div class="gift-body"></div>
+        <div class="gift-flap"></div>
+        <div class="wax-seal-mini">
+          <span class="wax-seal-mini-text">J<span class="wax-dot">.</span>M</span>
+        </div>
+      </div>
+      <h3>Presente</h3>
+      <p class="gift-hint">Toca el sobre para ver los datos</p>
+      <div class="gift-details" id="giftDetails">
+        <p><strong>Banco:</strong> Banco de Guayaquil</p>
+        <p><strong>Cuenta de ahorros:</strong> 001714685</p>
+        <p><strong>Cédula:</strong> 0930367669</p>
+        <p style="margin-top:0.5rem; font-size:0.78rem; color:#8C8275;">Vuestra presencia es el mejor regalo. Si desean tener un detalle con nosotros, lo recibiremos con todo el cariño.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bleed-below">
+  <div class="section-mark"></div>
   <div class="label reveal-up">Confirma tu asistencia</div>
   <div class="rsvp-deadline reveal-up delay-1">Fecha máxima de confirmación: <strong>20 de Agosto, 2026</strong></div>
 
@@ -1049,6 +1329,14 @@
     <button type="button" class="submit-btn" id="submitBtn" onclick="submitRSVP()" disabled>Confirmar</button>
     <div class="feedback" id="feedback"></div>
   </form>
+</section>
+
+<section>
+  <div class="section-mark"></div>
+  <div class="closing-quote reveal-up">
+    "Donde tú estés,<br>siempre será mi lugar favorito."
+    <div class="pearl-rule"></div>
+  </div>
 </section>
 
 <footer>
@@ -1089,16 +1377,34 @@
   // ---- Envelope opening ----
   const envelopeScreen = document.getElementById('envelopeScreen');
   const envelopeBtn = document.getElementById('envelopeBtn');
+  const envelopeWrap = document.getElementById('envelopeWrap');
+  let envelopeOpened = false;
 
-  envelopeScreen.addEventListener('click', () => {
+  function openEnvelope(){
+    if (envelopeOpened) return;
+    envelopeOpened = true;
     envelopeBtn.classList.add('open');
-    document.getElementById('envelopeWrap').classList.add('open');
+    envelopeWrap.classList.add('open');
     setTimeout(() => {
       envelopeScreen.classList.add('hide');
     }, 650);
     // Start music automatically since this counts as a user gesture
     if (!musicPlaying) startMusic();
-  }, { once: true });
+  }
+  window.openEnvelope = openEnvelope;
+
+  envelopeScreen.addEventListener('click', openEnvelope);
+  envelopeScreen.addEventListener('pointerup', openEnvelope);
+  envelopeScreen.addEventListener('touchend', function(e){
+    e.preventDefault();
+    openEnvelope();
+  }, { passive:false });
+
+  // ---- Gift envelope toggle ----
+  function toggleGift(){
+    const card = document.getElementById('giftCard');
+    card.classList.toggle('open');
+  }
 
   // ---- Section marks: drawn line on scroll into view ----
   const marks = document.querySelectorAll('.section-mark');
