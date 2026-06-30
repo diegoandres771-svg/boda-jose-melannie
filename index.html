@@ -1094,7 +1094,7 @@
 </div>
 
 <audio id="bgMusic" loop preload="metadata">
-  <source src="audio/piano-fondo.mp3" type="audio/mpeg">
+  <source src="audio/piano-fondo.mp3?v=2" type="audio/mpeg">
 </audio>
 
 <div id="musicPlayer" class="music-player">
@@ -1530,20 +1530,3 @@
 
 </body>
 </html>
-<!-- Audio oculto -->
-<audio id="musica-fondo" loop>
-  <source src="cancion.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-  // Función para iniciar la música al primer clic en cualquier lugar
-  function iniciarMusica() {
-    const audio = document.getElementById('musica-fondo');
-    audio.play();
-    // Elimina el evento para que no se ejecute múltiples veces
-    document.removeEventListener('click', iniciarMusica);
-  }
-
-  // Escucha el primer clic del usuario en toda la página
-  document.addEventListener('click', iniciarMusica);
-</script>
