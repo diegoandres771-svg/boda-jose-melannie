@@ -53,7 +53,6 @@
     gap:2.2rem;
     transition:opacity 0.9s ease, visibility 0.9s ease;
     cursor:pointer;
-    perspective:1400px;
   }
   .envelope-screen.hide{ opacity:0; visibility:hidden; pointer-events:none; }
 
@@ -71,7 +70,6 @@
     opacity:0;
     transform:translateY(10px) scale(0.96);
     animation:envelopeFadeIn 1.1s ease forwards 0.3s;
-    transform-style:preserve-3d;
   }
   @keyframes envelopeFadeIn{ to{ opacity:1; transform:translateY(0) scale(1); } }
 
@@ -115,14 +113,16 @@
     height:62%;
     background:linear-gradient(165deg, #2A5847 0%, #1E4639 55%, #122B22 100%);
     clip-path: polygon(0 0, 100% 0, 50% 92%);
-    transform-origin:top;
-    transition:transform 1s cubic-bezier(.65,-0.15,.35,1.1);
+    transform-origin:top center;
+    transition:transform 0.6s cubic-bezier(.4,0,.2,1), opacity 0.6s ease;
     border-bottom:1px solid rgba(201,168,106,0.2);
     z-index:3;
     box-shadow: inset 0 -12px 24px -10px rgba(0,0,0,0.35);
+    backface-visibility:hidden;
   }
   .envelope.open .envelope-flap{
-    transform:rotateX(178deg);
+    transform:scaleY(0) translateY(-6px);
+    opacity:0;
   }
 
   .wax-seal{
@@ -370,40 +370,30 @@
   .ambient-lights span{
     position:absolute;
     border-radius:50%;
-    filter:blur(70px);
-    opacity:0.32;
+    filter:blur(45px);
+    opacity:0.26;
     mix-blend-mode:screen;
     will-change:transform;
   }
   .light-1{
-    width:360px; height:360px;
+    width:280px; height:280px;
     background:var(--gold);
-    top:-100px; left:-80px;
-    animation:driftA 24s ease-in-out infinite alternate;
+    top:-80px; left:-60px;
+    animation:driftA 26s ease-in-out infinite alternate;
   }
   .light-2{
-    width:440px; height:440px;
-    background:#2A5847;
-    top:38%; right:-140px;
-    animation:driftB 28s ease-in-out infinite alternate;
-  }
-  .light-3{
     width:320px; height:320px;
-    background:var(--gold);
-    bottom:-110px; left:18%;
-    opacity:0.22;
-    animation:driftC 32s ease-in-out infinite alternate;
+    background:#2A5847;
+    bottom:-90px; right:-100px;
+    animation:driftB 30s ease-in-out infinite alternate;
   }
-  .light-4{
-    width:260px; height:260px;
-    background:#3A6B56;
-    top:70%; left:55%;
-    opacity:0.2;
-    animation:driftA 20s ease-in-out infinite alternate-reverse;
+  @keyframes driftA{ 0%{ transform:translate(0,0); } 100%{ transform:translate(40px,60px); } }
+  @keyframes driftB{ 0%{ transform:translate(0,0); } 100%{ transform:translate(-40px,-50px); } }
+
+  @media (max-width:600px){
+    .ambient-lights{ display:none; }
   }
-  @keyframes driftA{ 0%{ transform:translate(0,0); } 100%{ transform:translate(60px,90px); } }
-  @keyframes driftB{ 0%{ transform:translate(0,0); } 100%{ transform:translate(-55px,-70px); } }
-  @keyframes driftC{ 0%{ transform:translate(0,0); } 100%{ transform:translate(45px,-55px); } }
+
 
   /* PEARL PANELS — light cream cards used for poetic/detail blocks on the dark page */
   .pearl-panel{
@@ -500,7 +490,6 @@
     position:relative;
     width:92px; height:66px;
     margin:0 auto 1rem;
-    perspective:600px;
   }
   .gift-body{
     position:absolute; inset:0;
@@ -513,13 +502,13 @@
     height:58%;
     background:linear-gradient(165deg, #FFFEFB, #EFE7D8);
     clip-path: polygon(0 0, 100% 0, 50% 90%);
-    transform-origin:top;
-    transform-style:preserve-3d;
-    transition:transform 0.7s cubic-bezier(.65,-0.15,.35,1.1);
+    transform-origin:top center;
+    transition:transform 0.5s cubic-bezier(.4,0,.2,1), opacity 0.5s ease;
     border-bottom:1px solid var(--gold-soft);
     z-index:2;
+    backface-visibility:hidden;
   }
-  .gift-card.open .gift-flap{ transform:rotateX(178deg); }
+  .gift-card.open .gift-flap{ transform:scaleY(0) translateY(-4px); opacity:0; }
   .wax-seal-mini{
     position:absolute; top:55%; left:50%;
     transform:translate(-50%,-50%);
@@ -1086,8 +1075,6 @@
 <div class="ambient-lights">
   <span class="light-1"></span>
   <span class="light-2"></span>
-  <span class="light-3"></span>
-  <span class="light-4"></span>
 </div>
 
 <div class="envelope-screen" id="envelopeScreen" onclick="if(window.openEnvelope) window.openEnvelope();">
@@ -1106,7 +1093,7 @@
   <div class="envelope-hint">Toca para abrir</div>
 </div>
 
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop preload="metadata">
   <source src="audio/piano-fondo.mp3" type="audio/mpeg">
 </audio>
 
